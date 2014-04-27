@@ -7,3 +7,10 @@ Code exported from the demo org with [the Force.com CLI](https://github.com/hero
 
     $ force import
     Imported from /Users/sready/src/Check-In-App-lvl3/metadata
+    
+Setup Instructions
+=================
+1. Modify the Account Page Layout and drag the DirectionsPage into the Mobile Cards section of the layout.
+2. Add the included Quick Action to the publisher. To do so go to Setup > Build >  Customize > Chatter > Publisher Layouts and then edit the Global Layout. Drag the ‘Check In’ action into the list of publisher actions (tip:  put it next to ‘Post’ so it was on the initial publisher screen)
+
+For the demo flow, [watch this tutorial](https://www.youtube.com/watch?v=VdGHX8MUv84)
