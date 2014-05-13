@@ -7,7 +7,7 @@ global class CheckInController{
 
         // SOQL query to get the nearest accounts
         String queryString =
-        'SELECT Id, Name, ' +
+        'SELECT Id, Name, Location__Latitude__s, Location__Longitude__s, ' +
         'Phone, BillingStreet ' +
         'FROM Account ' +
         'WHERE DISTANCE(Location__c, GEOLOCATION('+lat+','+lon+'), \'mi\') < 20 ' +
@@ -33,15 +33,24 @@ global class CheckInController{
             
             FeedItem post = new FeedItem();
             post.ParentId = acctId;
-            post.Body = UserInfo.getName() + ' just checked in for an on-site meeting.';
+            post.Body = UserInfo.getName() + ' just checked in for an on-site meeting.\n' + comments;
             post.type = 'LinkPost'; 
             post.LinkUrl = '/' + myTask.Id;
-            post.Title = myTask.subject;
+            post.Title = 'Checked In: ' + myTask.subject;
             insert post; 
         } catch(System.Exception ex) {
             system.debug(ex.getMessage());
         }
         
         return true;
+    }
+    
+    global String getTaskStatuses() {
+        Schema.DescribeFieldResult statusField = Task.Status.getDescribe();
+        List<String> plValues = new List<String>();
+        for (Schema.PicklistEntry pe : statusField.getPicklistValues()) {
+            plValues.add(pe.getValue());
+        }
+        return JSON.serialize(plValues);
     }
 }
