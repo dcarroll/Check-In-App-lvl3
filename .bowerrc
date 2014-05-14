@@ -1,4 +1,4 @@
 {
 	"directory": "testproject/comp",
-	"json": "component.json"
+	"json": "bower.json"
 }
